@@ -14,10 +14,12 @@ import { PdfService } from './pdf.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   host: {
-    class: 'w-full h-full flex flex-nowrap',
+    class: 'w-full h-full flex flex-col -md:overflow-x-hidden',
   },
 })
 export class AppComponent {
+  public OpenedDrawer: boolean = false;
+
   public Fullname: string = '';
   public Clients: string[] = [];
   public Client: string = '';
