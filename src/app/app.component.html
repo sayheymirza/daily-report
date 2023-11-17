@@ -1,0 +1,202 @@
+<!-- config drawer -->
+<section class="flex flex-col w-[300px] p-10">
+  <!-- fullname -->
+  <div class="form-control">
+    <label class="label">
+      <span class="label-text">نام و نام خانوادگی</span>
+    </label>
+
+    <input
+      [(ngModel)]="Fullname"
+      (ngModelChange)="OnFullnameChange()"
+      placeholder="حتما بگید کی هستید"
+      type="text"
+      class="input input-bordered focus:input-primary placeholder:text-black/50"
+    />
+  </div>
+
+  <div class="flex-1"></div>
+
+  <!-- download pdf -->
+  <button (click)="Generate()" class="btn btn-primary w-full">دریافت گزارش روزانه</button>
+</section>
+
+<!-- content -->
+<section
+  class="bg-base-200 flex-1 m-4 mr-0 p-10 rounded-xl overflow-hidden flex flex-col items-center gap-10"
+>
+  <strong>گزارش روزانه</strong>
+
+  <div class="flex flex-nowarp items-center justify-between w-full">
+    <span>نام و نام خانوادگی : {{ Fullname }} </span>
+
+    <span>تاریخ : {{ Today }}</span>
+  </div>
+
+  <div class="overflow-x-auto w-full flex-1">
+    <table class="table table-xs">
+      <!-- head -->
+      <thead>
+        <tr class="bg-base-300">
+          <th class="rounded-tr-lg w-[65px]">
+            <button
+              (click)="NewReport()"
+              class="btn btn-square btn-sm btn-ghost"
+            >
+              <span class="material-icons"> add </span>
+            </button>
+          </th>
+          <th>شرح کار</th>
+          <th class="w-[200px]">به سفارش</th>
+          <th class="w-[120px]">نتیجه</th>
+          <th class="rounded-tl-lg w-[64px]"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of Reports; let i = index">
+          <td>
+            {{ i + 1 }}
+          </td>
+          <td>
+            <textarea
+              placeholder="شرح کار خود را بنویسید"
+              class="textarea textarea-sm w-full text-sm focus:textarea-primary"
+              [(ngModel)]="item.content"
+              (ngModelChange)="OnReportChange()"
+            ></textarea>
+          </td>
+          <td>
+            <div class="dropdown w-full">
+              <label
+                tabindex="0"
+                class="textarea w-full flex-1 flex flex-nowarp items-center"
+              >
+                <span class="flex-1 truncate">
+                  {{ item.client.length == 0 ? "هیچ کسی" : item.client }}
+                </span>
+
+                <span class="material-icons"> arrow_drop_down </span>
+              </label>
+              <ul
+                tabindex="0"
+                class="dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box max-h-[200px] overflow-y-scroll scrollbar-none flex flex-col"
+              >
+                <!-- slim input to add a client -->
+                <div class="flex flex-nowrap items-center gap-2">
+                  <input
+                    placeholder="به نام چه کسی"
+                    class="input input-bordered input-sm w-full focus:input-primary"
+                    [(ngModel)]="Client"
+                    (keyup.enter)="SetReportItemClientByIndex(i); AddClient()"
+                  />
+
+                  <button
+                    (click)="SetReportItemClientByIndex(i); AddClient()"
+                    class="btn btn-square btn-sm btn-success"
+                  >
+                    <span class="material-icons"> add </span>
+                  </button>
+                </div>
+
+                <div class="divider"></div>
+
+                <span
+                  *ngIf="Clients.length == 0"
+                  class="text-center text-xs my-4"
+                >
+                  هیچ کسی اضافه نشده است
+                </span>
+
+                <!-- list of clients -->
+                <div
+                  *ngFor="let client of Clients; let j = index"
+                  (click)="SetReportItemClientByIndex(i, client)"
+                  class="flex flex-nowrap items-center gap-2"
+                >
+                  <span class="flex-1 truncate">{{ client }}</span>
+
+                  <button
+                    (click)="RemoveClientByIndex(j)"
+                    class="btn btn-square btn-xs btn-error"
+                  >
+                    <span class="material-icons scale-75"> delete </span>
+                  </button>
+                </div>
+              </ul>
+            </div>
+          </td>
+          <td>
+            <div class="dropdown w-full">
+              <label
+                tabindex="0"
+                class="textarea w-full flex-1 flex flex-nowarp items-center"
+              >
+                <span class="flex-1 truncate">
+                  {{ item.result.length == 0 ? "نامشخص" : item.result }}
+                </span>
+
+                <span class="material-icons"> arrow_drop_down </span>
+              </label>
+              <ul
+                tabindex="0"
+                class="dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-36 max-h-[200px] overflow-y-scroll scrollbar-none flex flex-col"
+              >
+                <!-- small input -->
+                <input
+                  placeholder="نتیجه"
+                  class="input input-bordered input-sm text-sm w-full focus:input-primary sticky top-1"
+                  [(ngModel)]="item.result"
+                  (ngModelChange)="OnReportChange()"
+                />
+
+                <div class="divider text-xs">درصدی</div>
+
+                <div class="grid grid-cols-4 gap-1">
+                  <button
+                    *ngFor="
+                      let percent of [
+                        '0',
+                        '10',
+                        '20',
+                        '30',
+                        '40',
+                        '50',
+                        '60',
+                        '70',
+                        '80',
+                        '90',
+                        '100'
+                      ]
+                    "
+                    class="btn btn-sm btn-ghost text-xs"
+                    (click)="item.result = percent + '%'"
+                  >
+                    {{ percent }}%
+                  </button>
+                </div>
+
+                <div class="divider text-xs">گزینه</div>
+
+                <button
+                  *ngFor="let option of ['نامشخص', 'انجام شد', 'در حال بررسی']"
+                  class="btn btn-sm btn-ghost text-xs"
+                  (click)="item.result = option"
+                >
+                  {{ option }}
+                </button>
+              </ul>
+            </div>
+          </td>
+          <td>
+            <button
+              (click)="RemoveReportByIndex(i)"
+              class="btn btn-square btn-sm btn-error"
+            >
+              <span class="material-icons"> delete </span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
