@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1700208220347,
+  "timestamp": 1700561185232,
   "index": "https://sayheymirza.github.io/daily-report/index.html",
   "assetGroups": [
     {
@@ -12,10 +12,10 @@
       },
       "urls": [
         "https://sayheymirza.github.io/daily-report/favicon.ico",
-        "https://sayheymirza.github.io/daily-report/main-UW6YJAYX.js",
+        "https://sayheymirza.github.io/daily-report/main-5AY4CJNL.js",
         "https://sayheymirza.github.io/daily-report/manifest.webmanifest",
         "https://sayheymirza.github.io/daily-report/polyfills-LZBJRJJE.js",
-        "https://sayheymirza.github.io/daily-report/styles-MF7XVCHU.css"
+        "https://sayheymirza.github.io/daily-report/styles-AM4KJRGQ.css"
       ],
       "patterns": []
     },
@@ -50,10 +50,10 @@
     "https://sayheymirza.github.io/daily-report/assets/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
     "https://sayheymirza.github.io/daily-report/assets/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
     "https://sayheymirza.github.io/daily-report/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
-    "https://sayheymirza.github.io/daily-report/main-UW6YJAYX.js": "990ae317b77afd33fa91b421185fc33565a3e35b",
+    "https://sayheymirza.github.io/daily-report/main-5AY4CJNL.js": "8464322a589b8c64a20194c45f6c721d7b3e0cbe",
     "https://sayheymirza.github.io/daily-report/manifest.webmanifest": "6579fb74e3f0ff91e7333ea777c0c332693c82b3",
     "https://sayheymirza.github.io/daily-report/polyfills-LZBJRJJE.js": "fda1c82c5c620f1fa442f687b3df45a037f6fcc9",
-    "https://sayheymirza.github.io/daily-report/styles-MF7XVCHU.css": "047dfe46812ebd6e0d484677131c236039ec1c85"
+    "https://sayheymirza.github.io/daily-report/styles-AM4KJRGQ.css": "3aa6beaf80aff6cb27c21261b15bd7dfc633d8dc"
   },
   "navigationUrls": [
     {
